@@ -249,7 +249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487252, guid: 31270e9f38d5e7a448ae050b9633fce3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 487252, guid: 31270e9f38d5e7a448ae050b9633fce3, type: 3}
       propertyPath: m_LocalRotation.x
@@ -257,7 +257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487252, guid: 31270e9f38d5e7a448ae050b9633fce3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 487252, guid: 31270e9f38d5e7a448ae050b9633fce3, type: 3}
       propertyPath: m_LocalRotation.z
@@ -269,7 +269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487252, guid: 31270e9f38d5e7a448ae050b9633fce3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 487252, guid: 31270e9f38d5e7a448ae050b9633fce3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -383,6 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1138810327}
   - component: {fileID: 1138810328}
+  - component: {fileID: 1138810329}
   m_Layer: 0
   m_Name: ChessBoard
   m_TagString: Untagged
@@ -431,6 +432,20 @@ MonoBehaviour:
   - {fileID: 196866, guid: fc76812b7a3ed4171bf0b0691443999d, type: 3}
   - {fileID: 196802, guid: 4cfea74c030414aa6b813fbbdf3a73c9, type: 3}
   - {fileID: 138226, guid: 10c98d4c7debe466ebc21e3f9b68380a, type: 3}
+  isWhiteTurn: 1
+--- !u!114 &1138810329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138810326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f15e9a326b0af45f08fc9c062e2e73da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightPrefab: {fileID: 6529649818033951992, guid: 82bbee73c689a4918a498a261a4ad5b3, type: 3}
 --- !u!1 &1958746637
 GameObject:
   m_ObjectHideFlags: 0
