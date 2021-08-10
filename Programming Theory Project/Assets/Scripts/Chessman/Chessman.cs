@@ -7,6 +7,7 @@ public abstract class Chessman : MonoBehaviour
     public int CurrentX { get; set; }
     public int CurrentY { get; set; }
     public bool isWhite;
+    public GameObject highlight;
 
     public void SetPosition(int x, int y)
     {

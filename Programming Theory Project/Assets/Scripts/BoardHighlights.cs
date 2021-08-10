@@ -7,6 +7,8 @@ public class BoardHighlights : MonoBehaviour
     public static BoardHighlights Instance { get; set; }
 
     public GameObject highlightPrefab;
+    public Material highlightEmptySquare;
+    public Material highlightEnemySquare;
     private List<GameObject> highlights;
 
 
@@ -26,7 +28,6 @@ public class BoardHighlights : MonoBehaviour
             go = Instantiate(highlightPrefab);
             highlights.Add(go);
         }
-
         return go;
     }
 
@@ -41,6 +42,15 @@ public class BoardHighlights : MonoBehaviour
                     GameObject go = GetHighlightObject();
                     go.SetActive(true);
                     go.transform.position = new Vector3(i + 0.5f, 0, j + 0.5f);
+
+                    //Check if there is an enemy on the square, if so use the enemySquare material (red), else use the green one
+                    Chessman c = BoardManager.Instance.Chessmans[i, j];
+
+                    if (c != null && c.isWhite != BoardManager.Instance.isWhiteTurn)
+                        go.GetComponent<MeshRenderer>().material = highlightEnemySquare;
+
+                    else
+                        go.GetComponent<MeshRenderer>().material = highlightEmptySquare;
                 }
             }
 

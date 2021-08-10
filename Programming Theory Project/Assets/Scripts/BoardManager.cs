@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BoardManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class BoardManager : MonoBehaviour
 
     public bool isWhiteTurn = true;
 
+    public GameObject endGamePanel;
+    public TextMeshProUGUI endGameText;
+
 
     private void Start()
     {
@@ -31,7 +35,7 @@ public class BoardManager : MonoBehaviour
     private void Update()
     {
         UpdateSelection();
-        DrawChessboard();
+        //DrawChessboard();
 
         //Left Click
         if (Input.GetMouseButtonDown(0))
@@ -77,6 +81,7 @@ public class BoardManager : MonoBehaviour
             return;
 
         selectedChessman = Chessmans[x, y];
+        selectedChessman.GetComponent<Chessman>().highlight.SetActive(true);
         BoardHighlights.Instance.HighlightAllowedMoves(allowedMoves);
 
     }
@@ -103,6 +108,38 @@ public class BoardManager : MonoBehaviour
                 Destroy(c.gameObject);
             }
 
+
+            #region Promotion 
+
+            if (selectedChessman.GetType() == typeof(Pawn))
+            {
+                //If we're on the top of the board (= white team)
+                if (y == 7)
+                {
+                    //Destroy the pawn
+                    activeChessman.Remove(selectedChessman.gameObject);
+                    Destroy(selectedChessman.gameObject);
+
+                    //Instantiate the white queen
+                    SpawnChessman(1, x, y);
+                    selectedChessman = Chessmans[x, y];
+                }
+
+                //If we're on the bottom of the board (= black team)
+                else if (y == 0)
+                {
+                    //Destroy the pawn
+                    activeChessman.Remove(selectedChessman.gameObject);
+                    Destroy(selectedChessman.gameObject);
+
+                    //Instantiate the black queen
+                    SpawnChessman(7, x, y);
+                    selectedChessman = Chessmans[x, y];
+                }
+            }
+
+            #endregion
+
             Chessmans[selectedChessman.CurrentX, selectedChessman.CurrentY] = null;
             selectedChessman.transform.position = GetTileCenter(x, y);
             selectedChessman.SetPosition(x, y);
@@ -110,6 +147,8 @@ public class BoardManager : MonoBehaviour
 
             isWhiteTurn = !isWhiteTurn;
         }
+
+        selectedChessman.GetComponent<Chessman>().highlight.SetActive(false);
         BoardHighlights.Instance.HideHighlights();
 
         //If we have selected a chessman and click elsewhere, unselect it
@@ -206,7 +245,7 @@ public class BoardManager : MonoBehaviour
         return origin;
     }
 
-    private void DrawChessboard()
+    private void DrawChessboard() //Use to draw the board without gameobject
     {
         Vector3 widthLine = Vector3.right * 8;
         Vector3 heightLine = Vector3.forward * 8;
@@ -241,16 +280,18 @@ public class BoardManager : MonoBehaviour
 
     private void EndGame()
     {
+        endGamePanel.SetActive(true);
         if (isWhiteTurn)
-        {
-            Debug.Log("White teams wins");
-        }
+            endGameText.text = $"White Team Wins !";
 
         else
-        {
-            Debug.Log("Black team wins");
-        }
+            endGameText.text = $"Black Team Wins !";
 
+    }
+
+    public void RestartNewGame()
+    {
+        //Destroy every piece left
         foreach (var go in activeChessman)
             Destroy(go);
 
@@ -258,5 +299,8 @@ public class BoardManager : MonoBehaviour
         isWhiteTurn = true;
         BoardHighlights.Instance.HideHighlights();
         SpawnAllChessman();
+
+        //Disable end game panel
+        endGamePanel.SetActive(false);
     }
 }
