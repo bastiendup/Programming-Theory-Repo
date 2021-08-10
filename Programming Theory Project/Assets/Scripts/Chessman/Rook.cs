@@ -11,7 +11,8 @@ public class Rook : Chessman
         Chessman c;
         int i;
 
-        //Right
+        #region RightMove
+
         i = CurrentX;
         while (true)
         {
@@ -35,8 +36,10 @@ public class Rook : Chessman
                 break;
             }
         }
+        #endregion
 
-        //Left
+        #region LeftMove 
+
         i = CurrentX;
         while (true)
         {
@@ -61,7 +64,10 @@ public class Rook : Chessman
             }
         }
 
-        //Up
+        #endregion
+
+        #region UpMove 
+
         i = CurrentY;
         while (true)
         {
@@ -86,7 +92,10 @@ public class Rook : Chessman
             }
         }
 
-        //Down
+        #endregion
+
+        #region DownMove 
+
         i = CurrentY;
         while (true)
         {
@@ -110,6 +119,8 @@ public class Rook : Chessman
                 break;
             }
         }
+
+        #endregion
 
         return r;
     }

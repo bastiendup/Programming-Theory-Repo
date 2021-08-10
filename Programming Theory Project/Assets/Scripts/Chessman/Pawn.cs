@@ -9,10 +9,13 @@ public class Pawn : Chessman
         bool[,] r = new bool[8, 8];
         Chessman c, c2;
 
+        #region WhiteTeam 
+
         //White team move
         if (isWhite)
         {
-            //Diagonal Left
+            #region DiagonalLeft 
+
             //If we're not on the left and top edge
             if (CurrentX != 0 && CurrentY != 7)
             {
@@ -25,7 +28,10 @@ public class Pawn : Chessman
                 }
             }
 
-            //Diagonal Right
+            #endregion
+
+            #region DiagonalRight 
+
             //If we're not on the right and top edge
             if (CurrentX != 7 && CurrentY != 7)
             {
@@ -36,7 +42,10 @@ public class Pawn : Chessman
                     r[CurrentX + 1, CurrentY + 1] = true;
             }
 
-            //Middle
+            #endregion
+
+            #region Middle 
+
             //If we're not on top of the board
             if (CurrentY != 7)
             {
@@ -47,7 +56,10 @@ public class Pawn : Chessman
                     r[CurrentX, CurrentY + 1] = true;
             }
 
-            //Middle on first move
+            #endregion
+
+            #region MiddleOnFirstMove 
+
             //If we're on first move
             if (CurrentY == 1)
             {
@@ -59,13 +71,19 @@ public class Pawn : Chessman
                     r[CurrentX, CurrentY + 2] = true;
             }
 
+            #endregion
+
 
         }
 
-        //Black team
+        #endregion
+
+        #region BlackTeam 
+
         else
         {
-            //Diagonal Left
+            #region DiagonalLeft 
+
             //If we're not on the left and bottom edge
             if (CurrentX != 0 && CurrentY != 0)
             {
@@ -78,7 +96,10 @@ public class Pawn : Chessman
                 }
             }
 
-            //Diagonal Right
+            #endregion
+
+            #region DiagonalRight 
+
             //If we're not on the right and bottom edge
             if (CurrentX != 7 && CurrentY != 0)
             {
@@ -89,7 +110,10 @@ public class Pawn : Chessman
                     r[CurrentX + 1, CurrentY - 1] = true;
             }
 
-            //Middle
+            #endregion
+
+            #region Middle 
+
             //If we're not on the bottom of the board
             if (CurrentY != 0)
             {
@@ -100,7 +124,10 @@ public class Pawn : Chessman
                     r[CurrentX, CurrentY - 1] = true;
             }
 
-            //Middle on first move
+            #endregion
+
+            #region MiddleOnFirstMove 
+
             //If we're on first move
             if (CurrentY == 6)
             {
@@ -112,7 +139,12 @@ public class Pawn : Chessman
                     r[CurrentX, CurrentY - 2] = true;
             }
 
+            #endregion
+
         }
+
+        #endregion
+
         return r;
     }
 }
